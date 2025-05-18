@@ -2,6 +2,7 @@ import "~/styles/globals.css";
 
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
+import { ThemeProvider } from "next-themes";
 
 import { TRPCReactProvider } from "~/trpc/react";
 import { SidebarInset, SidebarProvider } from "~/components/ui/sidebar";
@@ -25,13 +26,15 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geist.variable}`}>
       <body>
-        <SidebarProvider>
-          <AppSidebar />
-          <SidebarInset>
-            <SiteHeader />
-            <TRPCReactProvider>{children}</TRPCReactProvider>
-          </SidebarInset>
-        </SidebarProvider>
+        <ThemeProvider attribute="class">
+          <SidebarProvider>
+            <AppSidebar />
+            <SidebarInset>
+              <SiteHeader />
+              <TRPCReactProvider>{children}</TRPCReactProvider>
+            </SidebarInset>
+          </SidebarProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
