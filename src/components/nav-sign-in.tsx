@@ -14,7 +14,6 @@ export function NavSignIn() {
           asChild
           size="lg"
           className="justify-center"
-          onClick={() => console.log("clivk")}
         >
           <a href="/api/auth/signin">Sign in</a>
         </SidebarMenuButton>

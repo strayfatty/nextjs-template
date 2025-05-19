@@ -28,7 +28,7 @@ export function NavUser(props: { session: Session }) {
               <Avatar className="size-8 rounded-lg">
                 <AvatarImage
                   src={props.session.user.image ?? undefined}
-                  alt={props.session.user.email ?? undefined}
+                  alt={props.session.user.name ?? undefined}
                 />
                 <AvatarFallback>AV</AvatarFallback>
               </Avatar>
