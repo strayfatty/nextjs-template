@@ -1,10 +1,9 @@
 "use client";
 
-import { AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 import { LogOutIcon, MoreVerticalIcon } from "lucide-react";
 import type { Session } from "next-auth";
-import { Avatar } from "~/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -25,12 +24,12 @@ export function NavUser(props: { session: Session }) {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton size="lg" className="center">
-              <Avatar className="size-8 rounded-lg">
+              <Avatar className="size-8 asdfa rounded-lg">
                 <AvatarImage
                   src={props.session.user.image ?? undefined}
                   alt={props.session.user.name ?? undefined}
                 />
-                <AvatarFallback>AV</AvatarFallback>
+                <AvatarFallback delayMs={200}>AV</AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">
