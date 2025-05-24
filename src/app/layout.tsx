@@ -31,7 +31,9 @@ export default function RootLayout({
             <AppSidebar />
             <SidebarInset>
               <SiteHeader />
-              <TRPCReactProvider>{children}</TRPCReactProvider>
+              <div className="flex flex-1 flex-col gap-4 p-4">
+                <TRPCReactProvider>{children}</TRPCReactProvider>
+              </div>
             </SidebarInset>
           </SidebarProvider>
         </ThemeProvider>
