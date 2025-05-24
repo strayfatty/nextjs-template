@@ -18,9 +18,11 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "~/components/ui/sidebar";
+import { getInitials } from "~/lib/getInitials";
 
 export function NavUser(props: { session: Session }) {
   const { isMobile } = useSidebar();
+  const userInitials = getInitials(props.session.user.name);
 
   return (
     <SidebarMenu>
@@ -33,7 +35,9 @@ export function NavUser(props: { session: Session }) {
                   src={props.session.user.image ?? undefined}
                   alt={props.session.user.name ?? undefined}
                 />
-                <AvatarFallback delayMs={200}>AV</AvatarFallback>
+                <AvatarFallback className="rounded-lg" delayMs={200}>
+                  {userInitials}
+                </AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">
@@ -59,7 +63,9 @@ export function NavUser(props: { session: Session }) {
                     src={props.session.user.image ?? undefined}
                     alt={props.session.user.name ?? undefined}
                   />
-                  <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                  <AvatarFallback className="rounded-lg" delayMs={200}>
+                    {userInitials}
+                  </AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-medium">
