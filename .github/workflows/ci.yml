@@ -1,0 +1,21 @@
+name: CI
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: pnpm/action-setup@v4
+    - name: pnpm install
+      run: pnpm i
+    - name: Create .env file
+      run: cp .env.example .env
+    - name: Check
+      run: pnpm check
