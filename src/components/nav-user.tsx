@@ -24,7 +24,7 @@ export function NavUser(props: { session: Session }) {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton size="lg" className="center">
-              <Avatar className="size-8 asdfa rounded-lg">
+              <Avatar className="asdfa size-8 rounded-lg">
                 <AvatarImage
                   src={props.session.user.image ?? undefined}
                   alt={props.session.user.name ?? undefined}

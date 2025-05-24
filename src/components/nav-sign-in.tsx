@@ -10,11 +10,7 @@ export function NavSignIn() {
   return (
     <SidebarMenu>
       <SidebarMenuItem>
-        <SidebarMenuButton
-          asChild
-          size="lg"
-          className="justify-center"
-        >
+        <SidebarMenuButton asChild size="lg" className="justify-center">
           <a href="/api/auth/signin">Sign in</a>
         </SidebarMenuButton>
       </SidebarMenuItem>

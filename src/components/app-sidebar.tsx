@@ -22,7 +22,11 @@ export async function AppSidebar() {
           <SidebarMenuItem>
             <SidebarMenuButton asChild className="font-bold text-lg">
               <Link href="/">
-                <img src="/favicon.ico" alt="" className="h-6 w-6 self-center" />
+                <img
+                  src="/favicon.ico"
+                  alt=""
+                  className="h-6 w-6 self-center"
+                />
                 <span>Home</span>
               </Link>
             </SidebarMenuButton>
