@@ -8,9 +8,7 @@ export default async function Users() {
   return (
     <div>
       <h1 className="mb-4 font-bold text-2xl">Users</h1>
-      <p className="text-muted-foreground">
-        View users
-      </p>
+      <p className="text-muted-foreground">View users</p>
     </div>
   );
 }

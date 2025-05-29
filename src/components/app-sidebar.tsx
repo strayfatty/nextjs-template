@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { NavAdministration } from "~/components/nav-administration";
+import { NavSecondary } from "~/components/nav-secondary";
 import { NavSignIn } from "~/components/nav-sign-in";
 import { NavUser } from "~/components/nav-user";
 import {
@@ -11,8 +13,6 @@ import {
   SidebarMenuItem,
 } from "~/components/ui/sidebar";
 import { auth } from "~/server/auth";
-import { NavAdministration } from "~/components/nav-administration";
-import { NavSecondary } from "~/components/nav-secondary";
 
 export async function AppSidebar() {
   const session = await auth();
