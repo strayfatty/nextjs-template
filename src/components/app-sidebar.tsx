@@ -11,6 +11,8 @@ import {
   SidebarMenuItem,
 } from "~/components/ui/sidebar";
 import { auth } from "~/server/auth";
+import { NavAdministration } from "~/components/nav-administration";
+import { NavSecondary } from "~/components/nav-secondary";
 
 export async function AppSidebar() {
   const session = await auth();
@@ -33,7 +35,10 @@ export async function AppSidebar() {
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
-      <SidebarContent />
+      <SidebarContent>
+        <NavAdministration />
+        <NavSecondary />
+      </SidebarContent>
       <SidebarFooter>
         {session ? <NavUser session={session} /> : <NavSignIn />}
       </SidebarFooter>
