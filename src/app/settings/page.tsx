@@ -28,10 +28,8 @@ export default async function Settings() {
               {userInitials}
             </AvatarFallback>
           </Avatar>
-          <div className="grid flex-1 text-left content-start leading-tight">
-            <span className="truncate font-medium">
-              {user?.name}
-            </span>
+          <div className="grid flex-1 content-start text-left leading-tight">
+            <span className="truncate font-medium">{user?.name}</span>
             <span className="truncate text-muted-foreground">
               {user?.email}
             </span>
