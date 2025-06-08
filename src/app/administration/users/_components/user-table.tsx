@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
 import { api } from "~/trpc/react";
 import { userTableDefaultQuery } from "./user-table-default-query";
+import { usePagination } from "~/hooks/use-pagination";
 
 export function UserTable() {
-  const { offset, limit, setPagination, pagination } = usePagination();
+  const { offset, limit, setPagination, pagination } = usePagination(userTableDefaultQuery.offset, userTableDefaultQuery.limit);
   const [users] = api.users.list.useSuspenseQuery({
     offset: offset,
     limit: limit,
@@ -37,19 +37,4 @@ export function UserTable() {
       </button>
     </div>
   );
-}
-
-function usePagination() {
-  const [pagination, setPagination] = useState({
-    pageIndex: 0,
-    pageSize: userTableDefaultQuery.limit,
-  });
-
-  const { pageIndex, pageSize } = pagination;
-  return {
-    offset: pageIndex * pageSize,
-    limit: pageSize,
-    setPagination: setPagination,
-    pagination: pagination,
-  };
 }
