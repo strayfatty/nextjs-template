@@ -1,10 +1,17 @@
 "use client";
 
+import { Button } from "~/components/ui/button";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "~/components/ui/table";
 import { usePagination } from "~/hooks/use-pagination";
 import { api } from "~/trpc/react";
 import { userTableDefaultQuery } from "./user-table-default-query";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "~/components/ui/table";
-import { Button } from "~/components/ui/button";
 
 export function UserTable() {
   const { offset, limit, setPagination, pagination } = usePagination(
@@ -29,7 +36,7 @@ export function UserTable() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {users?.map(user => (
+            {users?.map((user) => (
               <TableRow key={user.id}>
                 <TableCell>{user.name}</TableCell>
                 <TableCell>{user.email}</TableCell>
@@ -40,12 +47,26 @@ export function UserTable() {
         </Table>
       </div>
       <div>
-        <Button variant="outline" size="sm" onClick={() =>
-          setPagination({ pageIndex: pageIndex - 1, pageSize: pageSize })
-        } disabled={false}>prev</Button>
-        <Button variant="outline" size="sm" onClick={() =>
-          setPagination({ pageIndex: pageIndex + 1, pageSize: pageSize })
-        } disabled={false}>next</Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() =>
+            setPagination({ pageIndex: pageIndex - 1, pageSize: pageSize })
+          }
+          disabled={false}
+        >
+          prev
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() =>
+            setPagination({ pageIndex: pageIndex + 1, pageSize: pageSize })
+          }
+          disabled={false}
+        >
+          next
+        </Button>
       </div>
     </div>
   );
