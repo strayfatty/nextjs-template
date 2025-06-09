@@ -30,6 +30,6 @@ export const usersRouter = createTRPCRouter({
       .where(eq(users.id, input))
       .limit(1);
 
-    return result[0];
+    return result[0] ?? null;
   }),
 });
