@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export function usePagination(offset: number, limit: number) {
   const [pagination, setPagination] = useState({
-    pageIndex: offset / limit,
+    pageIndex: Math.floor(offset / limit),
     pageSize: limit,
   });
 

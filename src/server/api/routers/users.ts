@@ -7,8 +7,8 @@ export const usersRouter = createTRPCRouter({
   list: protectedProcedure
     .input(
       z.object({
-        offset: z.number().default(0),
-        limit: z.number().default(10),
+        offset: z.number().min(0).default(0),
+        limit: z.number().min(1).max(100).default(10),
       }),
     )
     .query(async ({ ctx, input }) => {

@@ -53,7 +53,7 @@ export function UserTable() {
           onClick={() =>
             setPagination({ pageIndex: pageIndex - 1, pageSize: pageSize })
           }
-          disabled={false}
+          disabled={pageIndex <= 0}
         >
           prev
         </Button>
