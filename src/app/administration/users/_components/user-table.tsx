@@ -18,6 +18,7 @@ export function UserTable() {
     userTableDefaultQuery.offset,
     userTableDefaultQuery.limit,
   );
+  const [totalCount] = api.users.count.useSuspenseQuery();
   const [users] = api.users.list.useSuspenseQuery({
     offset: offset,
     limit: limit,
@@ -63,7 +64,7 @@ export function UserTable() {
           onClick={() =>
             setPagination({ pageIndex: pageIndex + 1, pageSize: pageSize })
           }
-          disabled={false}
+          disabled={(pageIndex+1) * limit >= totalCount}
         >
           next
         </Button>

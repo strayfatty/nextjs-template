@@ -8,6 +8,7 @@ export default async function Users() {
   const session = await auth();
   if (!session) redirect("/api/auth/signin");
 
+  api.users.count.prefetch();
   api.users.list.prefetch(userTableDefaultQuery);
 
   return (
