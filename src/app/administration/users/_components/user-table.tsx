@@ -28,7 +28,7 @@ export function UserTable() {
   return (
     <div className="flex flex-col gap-1">
       <div className="rounded-md border">
-        <Table role="table" aria-label="User table">
+        <Table aria-label="User table">
           <TableHeader>
             <TableRow>
               <TableHead scope="col">Name</TableHead>
