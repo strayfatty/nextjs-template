@@ -28,20 +28,20 @@ export function UserTable() {
   return (
     <div className="flex flex-col gap-1">
       <div className="rounded-md border">
-        <Table>
+        <Table role="table" aria-label="User table">
           <TableHeader>
             <TableRow>
-              <TableHead>Name</TableHead>
-              <TableHead>Email</TableHead>
-              <TableHead>Image</TableHead>
+              <TableHead scope="col">Name</TableHead>
+              <TableHead scope="col">Email</TableHead>
+              <TableHead scope="col">Image</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {users?.map((user) => (
               <TableRow key={user.id}>
-                <TableCell>{user.name}</TableCell>
+                <TableCell>{user.name ?? "-"}</TableCell>
                 <TableCell>{user.email}</TableCell>
-                <TableCell>{user.image}</TableCell>
+                <TableCell>{user.image ?? "-"}</TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -51,6 +51,7 @@ export function UserTable() {
         <Button
           variant="outline"
           size="sm"
+          aria-label="Go to previous page"
           onClick={() =>
             setPagination({ pageIndex: pageIndex - 1, pageSize: pageSize })
           }
@@ -61,6 +62,7 @@ export function UserTable() {
         <Button
           variant="outline"
           size="sm"
+          aria-label="Go to next page"
           onClick={() =>
             setPagination({ pageIndex: pageIndex + 1, pageSize: pageSize })
           }
