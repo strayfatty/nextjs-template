@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { NavAdministration } from "~/components/nav-administration";
+import { NavSecondary } from "~/components/nav-secondary";
 import { NavSignIn } from "~/components/nav-sign-in";
 import { NavUser } from "~/components/nav-user";
 import {
@@ -33,7 +35,10 @@ export async function AppSidebar() {
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
-      <SidebarContent />
+      <SidebarContent>
+        <NavAdministration />
+        <NavSecondary />
+      </SidebarContent>
       <SidebarFooter>
         {session ? <NavUser session={session} /> : <NavSignIn />}
       </SidebarFooter>
