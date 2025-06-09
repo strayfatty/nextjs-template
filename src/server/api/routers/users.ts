@@ -4,13 +4,10 @@ import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 import { users } from "~/server/db/schema";
 
 export const usersRouter = createTRPCRouter({
-  count: protectedProcedure
-    .query(async ({ ctx }) => {
-      const result = await ctx.db
-      .select({count: count()})
-        .from(users);
-      return result[0]?.count ?? 0;
-    }),
+  count: protectedProcedure.query(async ({ ctx }) => {
+    const result = await ctx.db.select({ count: count() }).from(users);
+    return result[0]?.count ?? 0;
+  }),
   list: protectedProcedure
     .input(
       z.object({

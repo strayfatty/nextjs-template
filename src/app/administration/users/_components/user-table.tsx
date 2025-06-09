@@ -64,7 +64,7 @@ export function UserTable() {
           onClick={() =>
             setPagination({ pageIndex: pageIndex + 1, pageSize: pageSize })
           }
-          disabled={(pageIndex+1) * limit >= totalCount}
+          disabled={(pageIndex + 1) * limit >= totalCount}
         >
           next
         </Button>
