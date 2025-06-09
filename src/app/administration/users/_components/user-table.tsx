@@ -26,7 +26,7 @@ export function UserTable() {
   const { pageIndex, pageSize } = pagination;
 
   return (
-    <div>
+    <div className="flex flex-col gap-1">
       <div className="rounded-md border">
         <Table>
           <TableHeader>
@@ -47,7 +47,7 @@ export function UserTable() {
           </TableBody>
         </Table>
       </div>
-      <div>
+      <div className="flex justify-end gap-1">
         <Button
           variant="outline"
           size="sm"
