@@ -34,18 +34,20 @@ export function UserTable() {
         </TableHeader>
         <TableBody>
           {isPending
-          ? [...Array(limit)].map((_, i) => (
-              <TableRow key={i}>
-                <TableCell colSpan={3}><Skeleton className="h-lh"/></TableCell>
-              </TableRow>
-            ))
-          : users?.map((user) => (
-            <TableRow key={user.id}>
-              <TableCell>{user.name ?? "-"}</TableCell>
-              <TableCell>{user.email}</TableCell>
-              <TableCell>{user.image ?? "-"}</TableCell>
-            </TableRow>
-          ))}
+            ? [...Array(limit)].map((_, i) => (
+                <TableRow>
+                  <TableCell colSpan={3}>
+                    <Skeleton className="h-lh" />
+                  </TableCell>
+                </TableRow>
+              ))
+            : users?.map((user) => (
+                <TableRow key={user.id}>
+                  <TableCell>{user.name ?? "-"}</TableCell>
+                  <TableCell>{user.email}</TableCell>
+                  <TableCell>{user.image ?? "-"}</TableCell>
+                </TableRow>
+              ))}
         </TableBody>
       </Table>
       <div className="flex justify-end gap-1">
