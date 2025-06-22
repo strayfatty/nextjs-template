@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "~/components/ui/button";
+import { Skeleton } from "~/components/ui/skeleton";
 import {
   Table,
   TableBody,
@@ -13,7 +14,7 @@ import { usePagination } from "~/hooks/use-pagination";
 import { api } from "~/trpc/react";
 
 export function UserTable() {
-  const { offset, limit, setPagination, pagination } = usePagination(0, 1);
+  const { offset, limit, setPagination, pagination } = usePagination(0, 10);
   const { data: totalCount } = api.users.count.useQuery();
   const { data: users, isPending } = api.users.list.useQuery({
     offset: offset,
@@ -23,30 +24,30 @@ export function UserTable() {
 
   return (
     <div className="flex flex-col gap-1">
-      <div className="rounded-md border">
-        <Table aria-label="User table">
-          <TableHeader>
-            <TableRow>
-              <TableHead scope="col">Name</TableHead>
-              <TableHead scope="col">Email</TableHead>
-              <TableHead scope="col">Image</TableHead>
+      <Table aria-label="User table">
+        <TableHeader>
+          <TableRow>
+            <TableHead scope="col">Name</TableHead>
+            <TableHead scope="col">Email</TableHead>
+            <TableHead scope="col">Image</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {isPending
+          ? [...Array(limit)].map((_, i) => (
+              <TableRow key={i}>
+                <TableCell colSpan={3}><Skeleton className="h-lh"/></TableCell>
+              </TableRow>
+            ))
+          : users?.map((user) => (
+            <TableRow key={user.id}>
+              <TableCell>{user.name ?? "-"}</TableCell>
+              <TableCell>{user.email}</TableCell>
+              <TableCell>{user.image ?? "-"}</TableCell>
             </TableRow>
-          </TableHeader>
-          <TableBody>
-            {isPending
-            ? <TableRow key={0}>
-                <TableCell colSpan={3}>{"-"}</TableCell>
-              </TableRow>
-            : users?.map((user) => (
-              <TableRow key={user.id}>
-                <TableCell>{user.name ?? "-"}</TableCell>
-                <TableCell>{user.email}</TableCell>
-                <TableCell>{user.image ?? "-"}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </div>
+          ))}
+        </TableBody>
+      </Table>
       <div className="flex justify-end gap-1">
         <Button
           variant="outline"
