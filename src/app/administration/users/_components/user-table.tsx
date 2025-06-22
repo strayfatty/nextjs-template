@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "~/components/ui/button";
+import { Skeleton } from "~/components/ui/skeleton";
 import {
   Table,
   TableBody,
@@ -11,15 +12,11 @@ import {
 } from "~/components/ui/table";
 import { usePagination } from "~/hooks/use-pagination";
 import { api } from "~/trpc/react";
-import { userTableDefaultQuery } from "./user-table-default-query";
 
 export function UserTable() {
-  const { offset, limit, setPagination, pagination } = usePagination(
-    userTableDefaultQuery.offset,
-    userTableDefaultQuery.limit,
-  );
-  const [totalCount] = api.users.count.useSuspenseQuery();
-  const [users] = api.users.list.useSuspenseQuery({
+  const { offset, limit, setPagination, pagination } = usePagination(0, 10);
+  const { data: totalCount } = api.users.count.useQuery();
+  const { data: users, isPending } = api.users.list.useQuery({
     offset: offset,
     limit: limit,
   });
@@ -27,26 +24,42 @@ export function UserTable() {
 
   return (
     <div className="flex flex-col gap-1">
-      <div className="rounded-md border">
-        <Table aria-label="User table">
-          <TableHeader>
-            <TableRow>
-              <TableHead scope="col">Name</TableHead>
-              <TableHead scope="col">Email</TableHead>
-              <TableHead scope="col">Image</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {users?.map((user) => (
-              <TableRow key={user.id}>
-                <TableCell>{user.name ?? "-"}</TableCell>
-                <TableCell>{user.email}</TableCell>
-                <TableCell>{user.image ?? "-"}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </div>
+      <Table className="table-fixed" aria-label="User table">
+        <TableHeader>
+          <TableRow>
+            <TableHead className="w-[200px]" scope="col">
+              Name
+            </TableHead>
+            <TableHead className="w-[250px]" scope="col">
+              Email
+            </TableHead>
+            <TableHead scope="col">Image</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {isPending
+            ? [...Array(limit).keys()].map((x) => (
+                <TableRow key={x}>
+                  <TableCell colSpan={3}>
+                    <Skeleton className="h-lh" />
+                  </TableCell>
+                </TableRow>
+              ))
+            : users?.map((user) => (
+                <TableRow key={user.id}>
+                  <TableCell className="truncate" title={user.name ?? "-"}>
+                    {user.name ?? "-"}
+                  </TableCell>
+                  <TableCell className="truncate" title={user.email}>
+                    {user.email}
+                  </TableCell>
+                  <TableCell className="truncate" title={user.image ?? "-"}>
+                    {user.image ?? "-"}
+                  </TableCell>
+                </TableRow>
+              ))}
+        </TableBody>
+      </Table>
       <div className="flex justify-end gap-1">
         <Button
           variant="outline"
@@ -66,7 +79,7 @@ export function UserTable() {
           onClick={() =>
             setPagination({ pageIndex: pageIndex + 1, pageSize: pageSize })
           }
-          disabled={(pageIndex + 1) * limit >= totalCount}
+          disabled={(pageIndex + 1) * limit >= (totalCount ?? 0)}
         >
           next
         </Button>
