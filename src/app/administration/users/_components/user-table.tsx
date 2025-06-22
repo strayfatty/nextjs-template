@@ -11,15 +11,11 @@ import {
 } from "~/components/ui/table";
 import { usePagination } from "~/hooks/use-pagination";
 import { api } from "~/trpc/react";
-import { userTableDefaultQuery } from "./user-table-default-query";
 
 export function UserTable() {
-  const { offset, limit, setPagination, pagination } = usePagination(
-    userTableDefaultQuery.offset,
-    userTableDefaultQuery.limit,
-  );
-  const [totalCount] = api.users.count.useSuspenseQuery();
-  const [users] = api.users.list.useSuspenseQuery({
+  const { offset, limit, setPagination, pagination } = usePagination(0, 1);
+  const { data: totalCount } = api.users.count.useQuery();
+  const { data: users, isPending } = api.users.list.useQuery({
     offset: offset,
     limit: limit,
   });
@@ -37,7 +33,11 @@ export function UserTable() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {users?.map((user) => (
+            {isPending
+            ? <TableRow key={0}>
+                <TableCell colSpan={3}>{"-"}</TableCell>
+              </TableRow>
+            : users?.map((user) => (
               <TableRow key={user.id}>
                 <TableCell>{user.name ?? "-"}</TableCell>
                 <TableCell>{user.email}</TableCell>
@@ -66,7 +66,7 @@ export function UserTable() {
           onClick={() =>
             setPagination({ pageIndex: pageIndex + 1, pageSize: pageSize })
           }
-          disabled={(pageIndex + 1) * limit >= totalCount}
+          disabled={(pageIndex + 1) * limit >= (totalCount ?? 0)}
         >
           next
         </Button>
