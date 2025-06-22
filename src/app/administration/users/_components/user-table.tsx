@@ -27,8 +27,12 @@ export function UserTable() {
       <Table className="table-fixed" aria-label="User table">
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[200px]" scope="col">Name</TableHead>
-            <TableHead className="w-[250px]" scope="col">Email</TableHead>
+            <TableHead className="w-[200px]" scope="col">
+              Name
+            </TableHead>
+            <TableHead className="w-[250px]" scope="col">
+              Email
+            </TableHead>
             <TableHead scope="col">Image</TableHead>
           </TableRow>
         </TableHeader>
@@ -43,9 +47,15 @@ export function UserTable() {
               ))
             : users?.map((user) => (
                 <TableRow key={user.id}>
-                  <TableCell className="truncate" title={user.name ?? "-"}>{user.name ?? "-"}</TableCell>
-                  <TableCell className="truncate" title={user.email}>{user.email}</TableCell>
-                  <TableCell className="truncate" title={user.image ?? "-"}>{user.image ?? "-"}</TableCell>
+                  <TableCell className="truncate" title={user.name ?? "-"}>
+                    {user.name ?? "-"}
+                  </TableCell>
+                  <TableCell className="truncate" title={user.email}>
+                    {user.email}
+                  </TableCell>
+                  <TableCell className="truncate" title={user.image ?? "-"}>
+                    {user.image ?? "-"}
+                  </TableCell>
                 </TableRow>
               ))}
         </TableBody>
