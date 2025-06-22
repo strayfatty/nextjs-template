@@ -24,18 +24,18 @@ export function UserTable() {
 
   return (
     <div className="flex flex-col gap-1">
-      <Table aria-label="User table">
+      <Table className="table-fixed" aria-label="User table">
         <TableHeader>
           <TableRow>
-            <TableHead scope="col">Name</TableHead>
-            <TableHead scope="col">Email</TableHead>
+            <TableHead className="w-[200px]" scope="col">Name</TableHead>
+            <TableHead className="w-[250px]" scope="col">Email</TableHead>
             <TableHead scope="col">Image</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {isPending
-            ? [...Array(limit)].map((_, i) => (
-                <TableRow>
+            ? [...Array(limit).keys()].map((x) => (
+                <TableRow key={x}>
                   <TableCell colSpan={3}>
                     <Skeleton className="h-lh" />
                   </TableCell>
@@ -43,9 +43,9 @@ export function UserTable() {
               ))
             : users?.map((user) => (
                 <TableRow key={user.id}>
-                  <TableCell>{user.name ?? "-"}</TableCell>
-                  <TableCell>{user.email}</TableCell>
-                  <TableCell>{user.image ?? "-"}</TableCell>
+                  <TableCell className="truncate" title={user.name ?? "-"}>{user.name ?? "-"}</TableCell>
+                  <TableCell className="truncate" title={user.email}>{user.email}</TableCell>
+                  <TableCell className="truncate" title={user.image ?? "-"}>{user.image ?? "-"}</TableCell>
                 </TableRow>
               ))}
         </TableBody>
