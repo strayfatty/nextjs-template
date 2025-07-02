@@ -23,7 +23,13 @@
           }
         }
       },
+      "performance": {
+        "noImgElement": "off"
+      },
       "recommended": true,
+      "suspicious": {
+        "noDocumentCookie": "off"
+      },
       "style": {
         "noParameterAssign": "error",
         "useAsConstAssertion": "error",
