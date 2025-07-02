@@ -36,8 +36,8 @@ export async function AppSidebar() {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavAdministration />
-        <NavSecondary />
+        {session && <NavAdministration />}
+        {session && <NavSecondary />}
       </SidebarContent>
       <SidebarFooter>
         {session ? <NavUser session={session} /> : <NavSignIn />}
