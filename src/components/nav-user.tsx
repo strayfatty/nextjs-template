@@ -2,8 +2,8 @@
 
 import { DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 import { LogOutIcon, MoreVerticalIcon, SettingsIcon } from "lucide-react";
-import type { Session } from "next-auth";
 import Link from "next/link";
+import type { Session } from "next-auth";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import {
   DropdownMenu,
